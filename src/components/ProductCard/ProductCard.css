@@ -1,0 +1,351 @@
+.product-card {
+  background: transparent;
+    width: 100%;
+    height: 380px;
+    max-height: 380px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  margin: 0.5rem 0;
+  z-index: 0;
+}
+
+
+.product-card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+    box-shadow: var(--shadow-light);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transform-style: preserve-3d;
+}
+
+.card-front {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    transform: rotateY(0deg);
+}
+
+.card-back {
+    background: linear-gradient(to top right, rgba(160, 104, 57, 0.95), rgba(0, 0, 0, 0.95));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: white;
+    transform: rotateY(180deg);
+    padding: 1.2rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    box-sizing: border-box;
+    /* Custom thin scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: #b3b3b3 rgba(255,255,255,0.1);
+}
+.card-back::-webkit-scrollbar {
+    width: 6px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+}
+.card-back::-webkit-scrollbar-thumb {
+    background: #b3b3b3;
+    border-radius: 8px;
+}
+
+.card-front::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #A06839;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card:hover .card-front::before {
+    transform: translateX(0);
+}
+
+.card-front-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.product-header {
+    text-align: center;
+}
+
+.product-image {
+    width: 300px;
+    height: 200px;
+    margin: 0.5rem auto 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-image img {
+    width: 100%;
+    /* height: 100%; */
+    object-fit: contain;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card:hover .product-image img {
+    transform: translateY(-5px);
+}
+
+.product-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: var(--neutral-dark);
+    letter-spacing: -0.01em;
+}
+
+.product-description {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 1rem 0;
+    line-height: 1.6;
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-align: left;
+}
+
+.product-footer {
+    margin-top: auto;
+}
+
+.price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #A06839;
+    margin-bottom: 0.75rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.card-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.buy-button {
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.9rem;
+    box-shadow: var(--shadow-light);
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+}
+
+.flip-button {
+background: rgba(255, 255, 255, 0.2);
+    color: rgb(12, 12, 12);
+    border: 2px solid rgba(6, 6, 6, 0.3);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.8rem;
+   
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0.5rem 0 0 0;
+    transform: none;
+    z-index: 2;
+    display: block;
+    text-align: center;
+}
+
+
+
+.buy-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.buy-button:hover::before {
+    left: 100%;
+}
+
+.buy-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Back card styling */
+.card-back h3 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.ingredients-section, .benefits-section {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.ingredients-section h4, .benefits-section h4 {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.ingredients-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-bottom: 0.8rem;
+}
+
+.ingredient-tag {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 60px; /* Add space for the fixed button */
+}
+
+.benefits-list li {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.3rem;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.benefits-list li::before {
+    content: '✨';
+    font-size: 0.8rem;
+}
+
+.flip-back-button {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.8rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 1rem 0 0 0;
+    transform: none;
+    z-index: 2;
+    display: block;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .product-card {
+        height: 320px;
+        max-height: 320px;
+    }
+
+    .card-face {
+        padding: 1rem;
+    }
+
+    .product-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .product-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .product-description {
+        font-size: 0.8rem;
+        line-clamp: 2;
+        -webkit-line-clamp: 2;
+    }
+
+    .price {
+        font-size: 1.5rem;
+    }
+
+    .buy-button {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+    }
+
+    .ingredients-section h4, .benefits-section h4 {
+        font-size: 0.8rem;
+    }
+
+    .ingredient-tag {
+        font-size: 0.65rem;
+        padding: 0.15rem 0.5rem;
+    }
+
+    .benefits-list li {
+        font-size: 0.7rem;
+    }
+}
