@@ -126,7 +126,8 @@
     font-family: 'Playfair Display', serif;
     font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 0.4rem;
+   
+    margin-top: 1.4rem;
     color: var(--neutral-dark);
     letter-spacing: -0.01em;
 }
@@ -148,7 +149,6 @@
     font-size: 1.4rem;
     font-weight: 700;
     color: #A06839;
-    margin-bottom: 0.75rem;
     font-family: 'Inter', sans-serif;
 }
 
