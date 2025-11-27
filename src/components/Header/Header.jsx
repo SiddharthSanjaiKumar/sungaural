@@ -1,26 +1,54 @@
-import React from 'react';
+
+
+import React, { useState, useEffect } from 'react';
 import Logo from '../../assets/Logo.png';
 import './Header.css';
-import { useState } from 'react';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="header">
+    <header className={`header ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
         <div className="logo-container">
           <img src={Logo} alt="Sungaural Logo" className="logo-image" />
+          <div className="brand-text">
+            <span className="brand-name">Sungaural</span>
+            <span className="brand-tagline">Skincare</span>
+          </div>
         </div>
         <nav className="nav-menu">
-          <a href="#hero" className="nav-link">Home</a>
-          <a href="#products" className="nav-link">Products</a>
-          <a href="#about" className="nav-link">About</a>
-          <a href="#contact" className="nav-link">Contact</a>
+          <a href="#hero" className="nav-link">
+            <span>Home</span>
+          </a>
+          <a href="#products" className="nav-link">
+            <span>Products</span>
+          </a>
+          <a href="#about" className="nav-link">
+            <span>About</span>
+          </a>
+          <a href="#contact" className="nav-link">
+            <span>Contact</span>
+          </a>
         </nav>
-        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">
-          <span className={menuOpen ? 'hamburger-bar open' : 'hamburger-bar'}></span>
-          <span className={menuOpen ? 'hamburger-bar open' : 'hamburger-bar'}></span>
-          <span className={menuOpen ? 'hamburger-bar open' : 'hamburger-bar'}></span>
+        <button 
+          className={`hamburger ${menuOpen ? 'active' : ''}`} 
+          onClick={() => setMenuOpen(!menuOpen)} 
+          aria-label="Toggle navigation"
+        >
+          <span className="hamburger-bar"></span>
+          <span className="hamburger-bar"></span>
+          <span className="hamburger-bar"></span>
         </button>
         {menuOpen && (
           <div className="mobile-nav-menu">
@@ -34,6 +62,5 @@ const Header = () => {
     </header>
   );
 };
-       
 
 export default Header;
